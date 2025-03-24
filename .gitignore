@@ -1,0 +1,8 @@
+.venv
+.env
+.idea
+__pycache__
+vector_stores/minilm_l6_v2_database/
+vector_stores/minilm_l6_v2_chapters_database/
+vector_stores/nomic_embed_text_v1.5_database/
+vector_stores/nomic_embed_text_v1.5_chapters_database/
