@@ -1,14 +1,19 @@
 import os
-from assistant import Assistant
-from retriever import Retriever
+from core.assistant import Assistant
+from core.retriever import Retriever
 import streamlit as st
-from utils import stream_data
-
-import utils
+from core import utils
 
 llms = ['mistral', 'gemma3:4b', 'openai']
 embedding_models = ['sentence-transformers/all-MiniLM-L6-v2', 'nomic-ai/nomic-embed-text-v1.5']
 databases = ['minilm_l6_v2_chapters_database', 'nomic_embed_text_v1.5_chapters_database']
+
+st.subheader('Summaries and Question Generation')
+st.write('This project is an experimental Retrieval-Augmented Generation (RAG) for chapter summaries and question generation.')
+st.divider()
+st.sidebar.page_link('gui.py', label='Bible RAG')
+st.sidebar.page_link('pages/summarize.py', label='Bible Study Tools')
+
 
 # Load JSON data
 data_file = os.path.join(os.path.dirname(__file__), "../data/bible_books.json")
@@ -17,7 +22,7 @@ books, dictionary = utils.process_json_data(data_file_path)
 
 # Sidebar for system settings
 st.sidebar.header("Settings")
-llm = st.sidebar.selectbox("Select an LLM", llms)
+selected_llm = st.sidebar.selectbox("Select an LLM", llms)
 embedding_model = st.sidebar.selectbox("Select an embedding model", embedding_models)
 database = databases[0] if embedding_model == embedding_models[0] else databases[1]
 
@@ -29,17 +34,16 @@ chapter = st.sidebar.selectbox("Chapters", chapters)
 btn = st.sidebar.button('Generate', type="primary")
 
 # Heading
-st.subheader('Summaries and Question Generation')
 
 with st.spinner('Setting everything up ...'):
-    a = Assistant(model=llm)  # "gemma3:4b" mistral
+    a = Assistant(model=selected_llm)  # "gemma3:4b" mistral
     rt = Retriever(database_directory="./vector_stores/" + database)
 
     llm = a.setup_model()
     retriever = rt.get_summary_retriever(embedding_model=embedding_model, book=book, chapter=chapter)
     summary_data = a.get_summary_data(retriever)
 
-user_input = book + " " + str(chapter)
+user_input = book + " " + str(chapter) + " - " + selected_llm.capitalize()
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 

@@ -146,8 +146,8 @@ def generate_chapters(book, dictionary):
     return chapter_array
 
 
-if __name__ == "__main__":
-    import pipreqs
+# if __name__ == "__main__":
+#     import pipreqs
     # vectorize_bible_by_chapter("D:/chrome/bible-txt/",
     #                            persist_directory='./vector_stores/nomic_embed_text_v1.5_chapters_database',
     #                            model_name='nomic-ai/nomic-embed-text-v1.5')

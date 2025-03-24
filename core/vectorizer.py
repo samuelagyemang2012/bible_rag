@@ -28,13 +28,13 @@ class Vectorizer:
         # else:
         #     return "Invalid argument given for model. Must be 'huggingface' or 'ollama'"
 
-    def load_embeddings(self, persist_directory="./minilm_l6_v2_database/"):
+    def load_embeddings(self, persist_directory="./vector_stores/minilm_l6_v2_database/"):
         embeddings = self.get_embedding_model()
         vector_db = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
 
         return vector_db
 
-    def vectorize_documents(self, data_directory, persist_directory="./minilm_l6_v2_database/", document_type=".pdf",
+    def vectorize_documents(self, data_directory, persist_directory="./vector_stores/minilm_l6_v2_database/", document_type=".pdf",
                             multithreading=True, chunk_size=500, chunk_overlap=200):
         loader = None
 
@@ -69,8 +69,8 @@ class Vectorizer:
                               persist_directory=persist_directory)
 
 
-if __name__ == "__main__":
-    model = 'nomic-ai/nomic-embed-text-v1.5'  # 'sentence-transformers/all-MiniLM-L6-v2'# 'nomic-ai/nomic-embed-text-v1.5'  # 'sentence-transformers/all-MiniLM-L6-v2'
-
-    v = Vectorizer(embedding_model=model)
-    v.vectorize_documents(data_directory="./data/", persist_directory='./nomic_embed_text_v1.5_database/')
+# if __name__ == "__main__":
+#     model = 'nomic-ai/nomic-embed-text-v1.5'  # 'sentence-transformers/all-MiniLM-L6-v2'# 'nomic-ai/nomic-embed-text-v1.5'  # 'sentence-transformers/all-MiniLM-L6-v2'
+#
+#     v = Vectorizer(embedding_model=model)
+#     v.vectorize_documents(data_directory="./data/", persist_directory='./vector_stores/nomic_embed_text_v1.5_database/')

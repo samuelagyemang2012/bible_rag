@@ -1,12 +1,12 @@
 import os
 
 # from prompt import Prompts
-from vectorizer import Vectorizer
-from langchain.retrievers.multi_query import MultiQueryRetriever, BaseRetriever
-from prompt import Prompts
+from core.vectorizer import Vectorizer
+from langchain.retrievers.multi_query import MultiQueryRetriever
+
+
 # from my_prompts import user_prompt
 # from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain.chains import create_retrieval_chain
 
 
 class Retriever:
@@ -48,14 +48,14 @@ class Retriever:
         return docs
 
 
-if __name__ == "__main__":
-    # nomic-ai/nomic-embed-text-v1.5
-    # sentence-transformers/all-MiniLM-L6-v2
-
-    rt = Retriever(database_directory='./minilm_l6_v2_chapters_database')
-    retriever = rt.get_summary_retriever(embedding_model='sentence-transformers/all-MiniLM-L6-v2',
-                                         book='John',
-                                         chapter=3)
+# if __name__ == "__main__":
+#     # nomic-ai/nomic-embed-text-v1.5
+#     # sentence-transformers/all-MiniLM-L6-v2
+#
+#     rt = Retriever(database_directory='./vector_stores/minilm_l6_v2_chapters_database')
+#     retriever = rt.get_summary_retriever(embedding_model='sentence-transformers/all-MiniLM-L6-v2',
+#                                          book='John',
+#                                          chapter=3)
 
     # rt.test(retriever)
 

@@ -1,14 +1,9 @@
 from langchain_community.chat_models import ChatOllama
-from langchain.prompts import PromptTemplate, ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain.chains import RetrievalQA, LLMChain
 from langchain_community.llms import OpenAI
 from langchain_core.runnables import RunnablePassthrough
-from utils import wrap_text_preserve_newlines
 from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain.chains import create_retrieval_chain
-from langchain.chains import ConversationalRetrievalChain
-from prompt import Prompts
+from core.prompt import Prompts
 import os
 
 

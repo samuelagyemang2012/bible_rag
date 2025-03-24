@@ -1,12 +1,9 @@
 import os
 import argparse
-from random import choices
-
-from ollama import embeddings
-from transformers.utils.chat_template_utils import args_re
-from assistant import Assistant
-from retriever import Retriever
-from utils import stream_data_cmd
+import streamlit as st
+from core.assistant import Assistant
+from core.retriever import Retriever
+from core.utils import stream_data_cmd
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -38,9 +35,9 @@ def loop_cmd(llm, database, embedding_model):
 if __name__ == "__main__":
 
     modes = ['cli', 'gui']
-    llms = ['mistral', 'gemma:4b', 'openai']
+    llms = ['mistral', 'gemma3:4b', 'openai']
     embedding_models = ['sentence-transformers/all-MiniLM-L6-v2', 'nomic-ai/nomic-embed-text-v1.5']
-    databases = ['minilm_l6_v2_database', 'nomic_embed_text_v1.5_database']
+    databases = ['./vector_stores/minilm_l6_v2_database', './vector_stores/nomic_embed_text_v1.5_database']
 
     parser = argparse.ArgumentParser(description='Bible RAG application.')
 
@@ -49,15 +46,15 @@ if __name__ == "__main__":
                         choices=modes,
                         help='Run the application in the cli or use a gui.')
 
-    models = parser.add_argument('-l', '--llm',
-                                 default='mistral',
-                                 choices=llms,
-                                 help='The LLM to use')
+    parser.add_argument('-l', '--llm',
+                        default='mistral',
+                        choices=llms,
+                        help='The LLM to use')
 
-    embedding_model = parser.add_argument('-e', "--embedding_model",
-                                          default='sentence-transformers/all-MiniLM-L6-v2',
-                                          choices=embedding_models,
-                                          help='The embedding model to use.')
+    parser.add_argument('-e', "--embedding_model",
+                        default='sentence-transformers/all-MiniLM-L6-v2',
+                        choices=embedding_models,
+                        help='The embedding model to use.')
     args = parser.parse_args()
 
     database = databases[0] if args.embedding_model == embedding_models[0] else databases[1]
@@ -69,7 +66,7 @@ if __name__ == "__main__":
                  database=database,
                  embedding_model=args.embedding_model)
     else:
-        os.system("streamlit run BibleRAG.py")
+        os.system("streamlit run gui.py")
 
 # import requests
 #

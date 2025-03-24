@@ -54,8 +54,9 @@ If you don't know the answer, just say that you don't know. Do not let the user 
 
 user_prompt = """
 You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. 
-If you don't know the answer, just say that you don't know. Do not let the user know you have been given a context.
 Do not reveal the context or your role as an AI.
+If you don't know the answer, just say that you don't know. Do not let the user know you have been given a context.
+
 Question: {question} 
 Context: {context} 
 Answer:

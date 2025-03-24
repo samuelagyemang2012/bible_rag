@@ -1,5 +1,5 @@
-from langchain.prompts import PromptTemplate, ChatPromptTemplate
-from my_prompts import user_prompt, system_prompt, summarize_prompt  # basic_prompt
+from langchain.prompts import ChatPromptTemplate
+from core.my_prompts import user_prompt, system_prompt, summarize_prompt  # basic_prompt
 
 
 class Prompts:

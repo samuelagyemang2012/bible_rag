@@ -1,13 +1,7 @@
-import os
-import re
 from dotenv import load_dotenv
-from tqdm import tqdm
-from langchain.schema import Document
-import pickle
-from langchain_community.vectorstores import Chroma
-from utils import parse_json, stream_data_cmd
-from assistant import Assistant
-from retriever import Retriever
+from core.utils import stream_data_cmd
+from core.assistant import Assistant
+from core.retriever import Retriever
 
 load_dotenv()
 
@@ -18,7 +12,7 @@ if __name__ == "__main__":
 
     def run_basic():
         a = Assistant(model="gemma3:4b")
-        rt = Retriever(database_directory='./minilm_l6_v2_chapters_database')
+        rt = Retriever(database_directory='./vectorstore/minilm_l6_v2_chapters_database')
 
         llm = a.setup_model()
         retriever = rt.get_summary_retriever(embedding_model='sentence-transformers/all-MiniLM-L6-v2',
