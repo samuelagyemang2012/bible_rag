@@ -2,7 +2,7 @@
 
 This project is an **experimental** Retrieval-Augmented Generation (RAG) tool designed to interact with the bible and
 help generate summaries and bible study questions. It is compatible with <code>openai</code>, <code>ollama</code>
-and <code>huggingface</code> for embedding.
+and <code>huggingface</code> for embedding. To use <code>openai</code> models, create a <code>.env</code> file and add <code>OPENAI_API_KEY = "YOUR KEY"</code>.
 
 **Disclaimer:**
 
@@ -26,9 +26,6 @@ The chapters of each book of Bible is also embedded to help with chapter summari
 
 [Download the vector stores here](https://drive.google.com/drive/folders/17ILL-qkbBRCB7oQlS3o8lyCF59pc78ka?usp=sharing)
 
-To use <code>openai</code> models, create a <code>.env</code> file add <code>OPENAI_API_KEY = "YOUR KEY"</code>
-This is an open-source, experimental project. We welcome contributions, feedback, and collaboration. Please be aware
-that this project is in active development, and changes may occur frequently.
 
 **Run:**
 
